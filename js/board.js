@@ -1,5 +1,16 @@
 ﻿(function () {
-    var crosswordModule = angular.module("Crosswords", ['ngRoute']);
+    var crosswordModule = angular.module("Crosswords", ['ngRoute', 'ngSanitize']);
+
+    crosswordModule.run(function ($rootScope) {
+        var Scope = Object.getPrototypeOf($rootScope);
+        var Scope$eval = Scope.$eval;
+        Scope.$eval = function (expr, locals) {
+            var that = this;
+            return MSApp.execUnsafeLocalFunction(function () {
+                return Scope$eval.call(that, expr, locals);
+            });
+        };
+    });
 
     crosswordModule.config(function ($routeProvider) {
         $routeProvider
