@@ -1,0 +1,7 @@
+﻿<div>
+    <div class="board">
+        <div class="row" ng-repeat="row in board">
+            <span class="cell" ng-repeat="cell in row.cells track by $index"><input ng-if="cell!=null" type="text" maxlength="1" value="{{ cell.solution }}" /></span>
+        </div>
+    </div>
+</div>
